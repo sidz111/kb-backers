@@ -28,6 +28,6 @@ public class HomeController {
 		s.setEmail(email);
 		s.setTimeDate(new Date().toString());
 		subscriberService.addSubscriber(s);
-		return "redirect:/";
+		return "index";
 	}
 }

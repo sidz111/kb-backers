@@ -195,3 +195,12 @@ AOS.init({
   });
   $("#book_time").timepicker();
 })(jQuery);
+
+
+function success(){
+	Swal.fire({
+		icon: 'success',
+		title: 'Success',
+		text: 'Thank You for Subscribing'
+	}, 1000);
+}
