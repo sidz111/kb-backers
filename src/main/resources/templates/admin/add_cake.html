@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Cake</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Add your CSS file -->
+</head>
+<body>
+    <h1>Add New Cake</h1>
+
+    <form action="/admin/cake/add" method="post">
+        <label for="name">Cake Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" step="0.01" required>
+
+        <label for="isAvailable">Availability:</label>
+        <select id="isAvailable" name="isAvailable" required>
+            <option value="true">Available</option>
+            <option value="false">Not Available</option>
+        </select>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+
+        <label for="photo">Photo URL:</label>
+        <input type="text" id="photo" name="photo">
+
+        <button type="submit">Add Cake</button>
+    </form>
+
+    <br>
+    <a href="/admin/cakes">Back to Cake List</a>
+</body>
+</html>

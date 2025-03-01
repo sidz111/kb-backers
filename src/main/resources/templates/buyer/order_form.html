@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Place Order</title>
+</head>
+<body>
+    <h1>Confirm Your Order</h1>
+    <form action="/buyer/order" method="post">
+        <input type="hidden" name="cakeId" th:value="${cakeId}" />
+        <label for="userId">Your User ID:</label>
+        <input type="number" name="userId" required />
+        <button type="submit">Confirm Order</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manage Cakes</title>
+</head>
+<body>
+    <h1>Cakes</h1>
+    <a href="/admin/cake/add">Add New Cake</a>
+    <table>
+        <tr>
+            <th>Name</th><th>Price</th><th>Actions</th>
+        </tr>
+        <tr th:each="cake : ${cakes}">
+            <td th:text="${cake.name}"></td>
+            <td th:text="${cake.price}"></td>
+            <td>
+                <a th:href="@{/admin/cake/edit/{id}(id=${cake.id})}">Edit</a> |
+                <a th:href="@{/admin/cake/delete/{id}(id=${cake.id})}">Delete</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

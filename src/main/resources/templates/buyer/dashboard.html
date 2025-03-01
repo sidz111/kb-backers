@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Buyer Dashboard</title>
+</head>
+<body>
+    <h1>Available Cakes</h1>
+    <table>
+        <tr>
+            <th>Name</th><th>Price</th><th>Order</th>
+        </tr>
+        <tr th:each="cake : ${cakes}">
+            <td th:text="${cake.name}"></td>
+            <td th:text="${cake.price}"></td>
+            <td><a th:href="@{/buyer/order/{cakeId}(cakeId=${cake.id})}">Order Now</a></td>
+        </tr>
+    </table>
+</body>
+</html>

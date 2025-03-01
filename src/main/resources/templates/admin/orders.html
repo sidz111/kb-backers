@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Orders</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Add your CSS file -->
+</head>
+<body>
+    <h1>All Orders</h1>
+
+    <table border="1">
+        <tr>
+            <th>Order ID</th>
+            <th>User</th>
+            <th>Cake Name</th>
+            <th>Time</th>
+            <th>Status</th>
+        </tr>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.user.name}"></td>
+            <td th:text="${order.cake.name}"></td>
+            <td th:text="${order.time}"></td>
+             <td th:text="${order.isConfirm}"></td>
+        </tr>
+    </table>
+
+    <br>
+    <a href="/admin/dashboard">Back to Dashboard</a>
+</body>
+</html>
