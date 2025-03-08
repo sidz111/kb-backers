@@ -15,11 +15,11 @@ public class Order {
     private Boolean isConfirm;
     
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
     
     @ManyToOne
-    @JoinColumn(name = "cake_id", nullable = false)
+    @JoinColumn(name = "cake_id")
     private Cake cake;
 
     public Long getId() {
