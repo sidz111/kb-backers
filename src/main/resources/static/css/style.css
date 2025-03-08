@@ -2,98 +2,120 @@ html {
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
-
+/* =================== 🌟 Professional & Official Navbar Styles 🌟 =================== */
+/* 🔹 Base Navbar Styling */
 .ftco-navbar-light {
-  background: transparent !important;
-  position: absolute;
-  top: 50px;
-  left: 0;
-  right: 0;
-  z-index: 3;
-  padding: 0;
+    background: transparent !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 15px 0;
+    transition: all 0.4s ease-in-out;
 }
 
+/* 🔹 Navbar Brand */
 .ftco-navbar-light .navbar-brand {
-  color: #ffffff;
+    font-weight: 700;
+    font-size: 22px;
+    color: #ffffff;
+    transition: color 0.3s ease-in-out;
 }
 
-.ftco-navbar-light .navbar-brand:hover,
-.ftco-navbar-light .navbar-brand:focus {
-  color: #ffffff;
+.ftco-navbar-light .navbar-brand:hover {
+    color: #c8a97e;
 }
 
-.ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
-  font-size: 14px;
-  padding-top: 0.8rem;
-  padding-bottom: 0.8rem;
-  padding-left: 20px;
-  padding-right: 20px;
-  font-weight: 400;
-  color: #ffffff;
-  opacity: 1 !important;
+/* 🔹 Navbar Links */
+.ftco-navbar-light .navbar-nav .nav-link {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    padding: 10px 15px;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
 }
 
-.ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover {
-  color: #ffffff;
+.ftco-navbar-light .navbar-nav .nav-link:hover,
+.ftco-navbar-light .navbar-nav .nav-item.active > a {
+    color: #c8a97e;
+    border-bottom: 2px solid #c8a97e;
 }
 
-.ftco-navbar-light .navbar-nav > .nav-item.cta > a {
-  background: #c8a97e;
-  color: #ffffff;
-  border-radius: 5px;
+/* 🔹 CTA Buttons */
+.ftco-navbar-light .navbar-nav .nav-item.cta > a,
+.ftco-navbar-light .navbar-nav .nav-item.cta > button {
+    background: #ffc107;
+    color: #000000;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+    border: none;
 }
 
-.ftco-navbar-light .navbar-nav > .nav-item.active > a {
-  color: #c8a97e;
+.ftco-navbar-light .navbar-nav .nav-item.cta > a:hover,
+.ftco-navbar-light .navbar-nav .nav-item.cta > button:hover {
+    background: #e0a800;
 }
 
-/* ***************this below written code will work when our page content goes more than screen size or when it is scrolled */
+/* 🔽🔽 RESPONSIVE STYLES 🔽🔽 */
+@media (max-width: 991px) {
+    .ftco-navbar-light {
+        padding: 10px 0;
+    }
 
-.ftco-navbar-light.scrolled .nav-item.active > a {
-  color: #c8a97e !important;
-}
+    .navbar-toggler {
+        border: none;
+        outline: none;
+    }
 
-.ftco-navbar-light.scrolled .nav-item.cta > a {
-  color: #ffffff !important;
-  background: #c8a97e;
-  border: none !important;
-  border-radius: 0;
-}
-.ftco-navbar-light.scrolled .nav-item.cta > a span {
-  display: inline-block;
-  color: #ffffff !important;
-}
+    .ftco-navbar-light .navbar-nav {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 15px;
+        border-radius: 8px;
+    }
 
-.ftco-navbar-light.scrolled .nav-item.cta.cta-colored span {
-  border-color: #c8a97e;
-}
+    .ftco-navbar-light .nav-item {
+        margin-bottom: 8px;
+    }
 
-.ftco-navbar-light.scrolled .nav-link {
-  padding-top: 0.7rem !important;
-  padding-bottom: 0.7rem !important;
-  color: #000000 !important;
-}
+    .ftco-navbar-light .nav-link {
+        font-size: 15px;
+        color: #000000 !important;
+    }
 
-.ftco-navbar-light.scrolled .nav-link.active {
-  color: #c8a97e !important;
-}
-
-.ftco-navbar-light.scrolled.awake {
-  margin-top: 0px;
-  transition: 0.3s all ease-out;
-}
-
-.ftco-navbar-light.scrolled.sleep {
-  transition: 0.3s all ease-out;
-}
-.ftco-navbar-light.scrolled .navbar-brand {
-  color: #000000;
+    .ftco-navbar-light .navbar-nav .nav-item.cta > a,
+    .ftco-navbar-light .navbar-nav .nav-item.cta > button {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
 }
 
-.navbar-brand {
-  font-weight: 900;
-  font-size: 20px;
+
+/* =================== 🔹 MEDIA QUERIES (Responsive Design) 🔹 =================== */
+@media (max-width: 992px) {
+    .ftco-navbar-light {
+        background: rgba(0, 0, 0, 0.95) !important;
+        padding: 12px;
+    }
+
+    .ftco-navbar-light .navbar-nav {
+        text-align: center;
+    }
+
+    .ftco-navbar-light .nav-item {
+        padding: 10px 0;
+    }
+
+    .ftco-navbar-light .navbar-brand {
+        font-size: 20px;
+    }
 }
+
 
 /* *********carousel****** */
 
@@ -449,7 +471,6 @@ html {
 }
 
 .menus {
-  width: 100%;
   margin-bottom: 20px;
   padding-bottom: 20px;
   border: 1px solid #e6e6e6;

@@ -1,15 +1,22 @@
 package com.kb.controller;
 
-import java.util.Date;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.kb.Entity.Subscriber;
+import com.kb.Entity.User;
 import com.kb.service.CakeService;
 import com.kb.service.OrderService;
 import com.kb.service.SubscriberService;
@@ -19,7 +26,10 @@ import com.kb.service.UserService;
 public class HomeController {
 
 	@Autowired
-	SubscriberService subscriberService;
+	PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private SubscriberService subscriberService;
 
 	@Autowired
 	private CakeService cakeService;
@@ -33,20 +43,60 @@ public class HomeController {
 	@GetMapping("/")
 	public String homePage(Model model) {
 		model.addAttribute("cakes", cakeService.getAvailableCakes());
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		model.addAttribute("user", userService.getUserByEmail(email));
+		model.addAttribute("cakes", cakeService.getAllCakes());
 		return "index";
 	}
-	
+
 	@GetMapping("/login-page")
-	public String geLogInPage() {
+	public String getLoginPage() {
 		return "login";
 	}
 
-	@PostMapping("/subscribe-us")
-	public String addSubscribers(@RequestParam String email) {
-		Subscriber s = new Subscriber();
-		s.setEmail(email);
-		s.setTimeDate(new Date().toString());
-		subscriberService.addSubscriber(s);
-		return "index";
+	@PostMapping("/add-user")
+	public String addUser(@RequestParam("name") String name, 
+	                      @RequestParam("email") String email,
+	                      @RequestParam("password") String password, 
+	                      @RequestParam("address") String address,
+	                      @RequestParam("contact") String contact, 
+	                      @RequestParam("photo") MultipartFile photo, 
+	                      Model model) throws IOException {
+
+		// Check if user already exists
+		if (userService.getUserByEmail(email) != null) {
+			model.addAttribute("userExist", "User Already Exists");
+			return "login";
+		}
+
+		User user = new User();
+		user.setName(name);
+		user.setEmail(email);
+		user.setPassword(passwordEncoder.encode(password));
+		user.setRole("ROLE_BUYER");
+		user.setContact(contact);
+		user.setAddress(address);
+
+		// Save Image to Static Folder (src/main/resources/static/uploads)
+		String imageName = "default.jpg"; // Default image if none is uploaded
+
+		if (!photo.isEmpty()) {
+			imageName = System.currentTimeMillis() + "_" + photo.getOriginalFilename();
+			Path uploadDir = Paths.get("src/main/resources/static/uploads");
+
+			// Create directory if it doesn't exist
+			if (!Files.exists(uploadDir)) {
+				Files.createDirectories(uploadDir);
+			}
+
+			// Save the file
+			Path filePath = uploadDir.resolve(imageName);
+			Files.copy(photo.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+		}
+
+		user.setPhoto(imageName);
+		userService.createUser(user);
+
+		return "redirect:/login-page";
 	}
 }
