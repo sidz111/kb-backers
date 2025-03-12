@@ -1,5 +1,7 @@
 package com.kb.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -52,7 +54,7 @@ public class BuyerController {
             Order order = new Order();
             order.setUser(user);
             order.setCake(cake);
-            order.setTime(java.time.LocalDateTime.now().toString());
+            order.setTime(new Date().toString());
             order.setIsConfirm(false);
             orderService.placeOrder(order);
         }

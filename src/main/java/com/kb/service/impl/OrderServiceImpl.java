@@ -54,4 +54,25 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getOrdersByTime(String time) {
         return orderRepository.findByTimeContaining(time);
     }
+
+	@Override
+	public Order confirmOrder(Order order) {
+		Optional<Order> o = orderRepository.findById(order.getId());
+		if(o.isEmpty()) {
+			return null;
+		}
+		else {
+			return orderRepository.save(order);
+		}
+	}
+
+	@Override
+	public List<Order> getOrdersByStatus(Boolean isConfirm) {
+		return this.orderRepository.findByIsConfirm(isConfirm);
+	}
+
+	@Override
+	public void deleteOrderById(Long orderId) {
+		orderRepository.deleteById(orderId);
+	}
 }

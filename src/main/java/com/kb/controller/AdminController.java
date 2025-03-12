@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kb.Entity.Cake;
+import com.kb.Entity.Order;
 import com.kb.Entity.User;
 import com.kb.repository.UserRepository;
 import com.kb.service.CakeService;
@@ -48,6 +50,12 @@ public class AdminController {
         model.addAttribute("cakes", cakeService.getAllCakes());
         model.addAttribute("orders", orderService.getOrdersByTime(""));
         model.addAttribute("buyers", userRepository.findByRole("ROLE_BUYER"));
+        
+        List<Order> pendingOrders = orderService.getOrdersByStatus(false); // Get all pending orders
+        List<Order> bookedOrders = orderService.getOrdersByStatus(true); // Get all confirmed orders
+
+        model.addAttribute("pendingOrders", pendingOrders);
+        model.addAttribute("bookedOrders", bookedOrders);
         return "/admin/dashboard";
     }
 
@@ -180,5 +188,24 @@ public class AdminController {
         model.addAttribute("orders", orderService.getOrdersByTime(""));
         model.addAttribute("buyers", userRepository.findByRole("ROLE_BUYER"));
     	return "admin/all-users";
+    }
+    
+    @GetMapping("/confirm-order/{orderId}")
+    public String confirmOrder(@PathVariable("orderId") Long orderId) {
+    	Optional<Order> order = orderService.getOrderById(orderId);
+    	if(order.isEmpty()) {
+    		return null;
+    	}
+    	else {
+    		order.get().setIsConfirm(true);
+    		orderService.confirmOrder(order.get());
+    	}
+    	return "redirect:/admin/dashboard";
+    }
+    
+    @GetMapping("/delete-order/{orderId}")
+    public String deleteOrder(@PathVariable("orderId") Long orderId) {
+    	orderService.deleteOrderById(orderId);
+    	return "redirect:/admin/dashboard";
     }
 }
