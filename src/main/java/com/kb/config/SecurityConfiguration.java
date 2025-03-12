@@ -40,7 +40,7 @@ public class SecurityConfiguration {
 		.requestMatchers("/admin/**")
 		.hasRole("ADMIN")
 		.requestMatchers("/buyer/**")
-		.hasRole("/BUYER")
+		.permitAll()
 		.requestMatchers("/")
 		.authenticated()
 		.requestMatchers("/css/login.css")

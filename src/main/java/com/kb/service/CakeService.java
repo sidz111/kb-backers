@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface CakeService {
     Cake addCake(Cake cake);
-    Cake updateCake(Long cakeId, Cake cake);
+    Cake updateCake(Long cakeId, Optional<Cake> c);
     void deleteCake(Long cakeId);
     Optional<Cake> getCakeById(Long cakeId);
     List<Cake> getAllCakes();

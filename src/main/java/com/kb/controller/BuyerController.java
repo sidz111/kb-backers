@@ -1,6 +1,7 @@
 package com.kb.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,26 +36,28 @@ public class BuyerController {
         return "buyer/dashboard";
     }
 
-    @GetMapping("/order/{cakeId}")
-    public String placeOrder(@PathVariable Long cakeId, Model model) {
-        model.addAttribute("cakeId", cakeId);
-        return "buyer/order_form";
-    }
+//    @GetMapping("/order/{cakeId}")
+//    public String placeOrder(@PathVariable Long cakeId, Model model) {
+//        model.addAttribute("cakeId", cakeId);
+//        return "buyer/order_form";
+//    }
 
-    @PostMapping("/order")
-    public String confirmOrder(@RequestParam Long cakeId, @RequestParam Long userId) {
+    @GetMapping("/order/{cakeId}")
+    public String confirmOrder(@PathVariable("cakeId") Long cakeId) {
         Cake cake = cakeService.getCakeById(cakeId).orElse(null);
-        User user = userService.getUserById(userId).orElse(null);
+        String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.getUserById(userService.getUserByEmail(userEmail).getId()).orElse(null);
 
         if (cake != null && user != null) {
             Order order = new Order();
             order.setUser(user);
             order.setCake(cake);
             order.setTime(java.time.LocalDateTime.now().toString());
+            order.setIsConfirm(false);
             orderService.placeOrder(order);
         }
 
-        return "redirect:/buyer/dashboard";
+        return "redirect:/";
     }
 
     @GetMapping("/orders")

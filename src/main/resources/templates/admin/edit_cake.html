@@ -1,37 +1,153 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Edit Cake</title>
-    <link rel="stylesheet" href="/css/styles.css"> <!-- Add your CSS file -->
+<title>Admin Dashboard</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<!-- Font Awesome (Icons) -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body {
+	background-color: #f8f9fa;
+}
+
+.sidebar {
+	width: 250px;
+	height: 100vh;
+	background: #343a40;
+	color: white;
+	padding-top: 20px;
+	position: fixed;
+}
+
+.sidebar a {
+	color: white;
+	padding: 10px;
+	display: block;
+	text-decoration: none;
+	transition: 0.3s;
+}
+
+.sidebar a:hover {
+	background: #495057;
+}
+
+.main-content {
+	margin-left: 250px;
+	padding: 20px;
+}
+</style>
 </head>
 <body>
-    <h1>Edit Cake</h1>
 
-    <form action="/admin/cake/edit" method="post">
-        <input type="hidden" name="id" th:value="${cake.id}" />
+	<!-- Sidebar -->
+	<div class="sidebar">
+		<h3 class="text-center">Admin Panel</h3>
+		<hr>
+		<a href="/admin/dashboard"><i class="fas fa-birthday-cake"></i> Admin Dashboard</a>
+        <a href="/admin/cakes"><i class="fas fa-birthday-cake"></i> Manage Cakes</a>
+        <a href="/admin/cake/add"><i class="fas fa-birthday-cake"></i> Add Cakes</a>
+        <a href="/admin/allUsers"><i class="fas fa-users"></i> All Users</a>
+        <a href="/logout" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a>
+	</div>
 
-        <label for="name">Cake Name:</label>
-        <input type="text" id="name" name="name" th:value="${cake.name}" required>
+	<!-- Main Content -->
+	<div class="main-content">
+		<div class="container">
+			<h1 class="mb-4">Welcome, Admin</h1>
+			<div class="row">
+				<!-- Dashboard Cards -->
+				<div class="col-md-4">
+					<div class="card bg-primary text-white">
+						<div class="card-body">
+							<h5 class="card-title text-center">Total Cakes</h5>
+							<p class="card-text fs-3 text-center"
+								th:text="${cakes != null ? cakes.size() : 0}">50</p>
+						</div>
+					</div>
+				</div>
 
-        <label for="price">Price:</label>
-        <input type="number" id="price" name="price" step="0.01" th:value="${cake.price}" required>
+				<div class="col-md-4">
+					<div class="card bg-success text-white">
+						<div class="card-body">
+							<h5 class="card-title text-center">Total Orders</h5>
+							<p class="card-text fs-3 text-center"
+								th:text="${orders != null ? orders.size() : 0}">120</p>
+						</div>
+					</div>
+				</div>
 
-        <label for="isAvailable">Availability:</label>
-        <select id="isAvailable" name="isAvailable">
-            <option value="true" th:selected="${cake.isAvailable}">Available</option>
-            <option value="false" th:selected="${!cake.isAvailable}">Not Available</option>
-        </select>
+				<div class="col-md-4">
+					<div class="card bg-warning text-dark">
+						<div class="card-body">
+							<h5 class="card-title text-center">Total Users</h5>
+							<p class="card-text fs-3 text-center"
+								th:text="${buyers != null ? buyers.size() : 0}">75</p>
+						</div>
+					</div>
+				</div>
+			</div>
 
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" rows="4" th:text="${cake.description}" required></textarea>
+			<!-- Add New Cake Section -->
+			<div class="mt-4">
+				<h4>Add New Cake</h4>
+				<div class="card p-4">
+					<form action="/admin/cake/edit" method="post"
+						enctype="multipart/form-data">
+						<!-- Hidden input for the cake id -->
+						<input type="hidden" name="id" th:value="${cake.id}" />
 
-        <label for="photo">Photo URL:</label>
-        <input type="text" id="photo" name="photo" th:value="${cake.photo}">
+						<div class="mb-3">
+							<label class="form-label" for="name">Cake Name:</label> <input
+								type="text" id="name" name="name" th:value="${cake.name}"
+								class="form-control" required>
+						</div>
 
-        <button type="submit">Update Cake</button>
-    </form>
+						<div class="mb-3">
+							<label class="form-label" for="price">Price:</label> <input
+								type="number" id="price" name="price" step="0.01"
+								th:value="${cake.price}" class="form-control" required>
+						</div>
 
-    <br>
-    <a href="/admin/cakes">Back to Cake List</a>
+						<div class="mb-3">
+							<label class="form-label" for="isAvailable">Availability:</label>
+							<select id="isAvailable" name="isAvailable" class="form-select">
+								<option value="true" th:selected="${cake.isAvailable}">Available</option>
+								<option value="false" th:selected="${!cake.isAvailable}">Not
+									Available</option>
+							</select>
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label" for="description">Description:</label>
+							<textarea id="description" name="description" rows="4"
+								th:text="${cake.description}" class="form-control" required></textarea>
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label" for="photo">Upload Photo:</label> <input
+								type="file" name="photo" accept="image/*" class="form-control">
+							<!-- Optional: Display existing photo if necessary -->
+							<div>
+								<img th:src="@{/cakes/{photo}(photo=${cake.photo})}"
+									alt="Current Cake Photo" width="100" />
+							</div>
+						</div>
+
+						<button type="submit" class="btn btn-primary w-100">Update
+							Cake</button>
+					</form>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Bootstrap JS -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

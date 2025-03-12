@@ -124,20 +124,61 @@ public class AdminController {
     }
 
     @PostMapping("/cake/edit")
-    public String updateCake(@ModelAttribute Cake cake) {
-        cakeService.updateCake(cake.getId(), cake);
-        return "redirect:/admin/cakes";
+    public String updateCake(
+            @RequestParam("id") Long id, // Get the ID of the cake to update
+            @RequestParam("name") String name,
+            @RequestParam("price") Double price,
+            @RequestParam("isAvailable") Boolean isAvailable,
+            @RequestParam("description") String description,
+            @RequestParam(value = "photo", required = false) MultipartFile photo, // The photo is optional
+            Model model
+    ) throws IOException {
+
+        // Retrieve the cake from the database
+        Optional<Cake> c = cakeService.getCakeById(id);
+
+        // Update the cake properties
+        c.get().setName(name);
+        c.get().setPrice(price);
+        c.get().setIsAvailable(isAvailable);
+        c.get().setDescription(description);
+
+        // Handle photo upload if a new photo is provided
+        if (photo != null && !photo.isEmpty()) {
+            String cakeImage = System.currentTimeMillis() + "_" + photo.getOriginalFilename();
+            Path uploadDir = Paths.get("src/main/resources/static/cakes");
+
+            if (!Files.exists(uploadDir)) {
+                Files.createDirectories(uploadDir);
+            }
+
+            Path filePath = uploadDir.resolve(cakeImage);
+            Files.copy(photo.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+            c.get().setPhoto(cakeImage);
+        }
+        // Save the updated cake back to the database
+        cakeService.updateCake(c.get().getId(), c);
+
+        // Optional: Add additional data for the view (if needed)
+        model.addAttribute("cakes", cakeService.getAllCakes());
+        model.addAttribute("orders", orderService.getOrdersByTime(""));
+        model.addAttribute("buyers", userRepository.findByRole("ROLE_BUYER"));
+
+        return "redirect:/admin/cakes"; // Redirect to the cakes list page after the update
     }
+
 
     @GetMapping("/cake/delete/{id}")
     public String deleteCake(@PathVariable Long id) {
         cakeService.deleteCake(id);
         return "redirect:/admin/cakes";
     }
-
-    @GetMapping("/orders")
-    public String viewOrders(Model model) {
+    
+    @GetMapping("/allUsers")
+    public String getAllUsers(Model model) {
+    	model.addAttribute("cakes", cakeService.getAllCakes());
         model.addAttribute("orders", orderService.getOrdersByTime(""));
-        return "admin/orders";
+        model.addAttribute("buyers", userRepository.findByRole("ROLE_BUYER"));
+    	return "admin/all-users";
     }
 }

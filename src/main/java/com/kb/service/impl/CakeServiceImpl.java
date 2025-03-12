@@ -20,13 +20,13 @@ public class CakeServiceImpl implements CakeService {
     }
 
     @Override
-    public Cake updateCake(Long cakeId, Cake cake) {
+    public Cake updateCake(Long cakeId, Optional<Cake> cake) {
         return cakeRepository.findById(cakeId).map(existingCake -> {
-            existingCake.setName(cake.getName());
-            existingCake.setPrice(cake.getPrice());
-            existingCake.setIsAvailable(cake.getIsAvailable());
-            existingCake.setDescription(cake.getDescription());
-            existingCake.setPhoto(cake.getPhoto());
+            existingCake.setName(cake.get().getName());
+            existingCake.setPrice(cake.get().getPrice());
+            existingCake.setIsAvailable(cake.get().getIsAvailable());
+            existingCake.setDescription(cake.get().getDescription());
+            existingCake.setPhoto(cake.get().getPhoto());
             return cakeRepository.save(existingCake);
         }).orElse(null);
     }

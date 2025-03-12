@@ -1,30 +1,4 @@
-<!-- <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Manage Cakes</title>
-</head>
-<body>
-    <h1>Cakes</h1>
-    <a href="/admin/cake/add">Add New Cake</a>
-    <table>
-        <tr>
-            <th>Name</th><th>Price</th><th>Actions</th>
-        </tr>
-        <tr th:each="cake : ${cakes}">
-            <td th:text="${cake.name}"></td>
-            <td th:text="${cake.price}"></td>
-            <td>
-                <a th:href="@{/admin/cake/edit/{id}(id=${cake.id})}">Edit</a> |
-                <a th:href="@{/admin/cake/delete/{id}(id=${cake.id})}">Delete</a>
-            </td>
-        </tr>
-    </table>
-</body>
-</html>
- -->
- 
- 
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Admin Dashboard</title>
@@ -66,9 +40,10 @@
     <div class="sidebar">
         <h3 class="text-center">Admin Panel</h3>
         <hr>
+       <a href="/admin/dashboard"><i class="fas fa-birthday-cake"></i> Admin Dashboard</a>
         <a href="/admin/cakes"><i class="fas fa-birthday-cake"></i> Manage Cakes</a>
-        <a href="/admin/dashboard"><i class="fas fa-shopping-cart"></i> View Orders</a>
-        <a href="/admin/users"><i class="fas fa-users"></i> Manage Users</a>
+        <a href="/admin/cake/add"><i class="fas fa-birthday-cake"></i> Add Cakes</a>
+        <a href="/admin/allUsers"><i class="fas fa-users"></i> All Users</a>
         <a href="/logout" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 
@@ -113,16 +88,21 @@
                     <thead class="table-dark text-center">
                         <tr>
                             <th>#</th>
+                            <td>Photo</td>
                             <th>Cake Name</th>
                             <th>Price</th>
+                            <th>Is Available</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="text-center" th:each="cake : ${cakes}">
 			<td th:text="${cake.id}"></td>
+			<td><img th:src="@{/cakes/{photo}(photo=${cake.photo})}"
+								alt="Cake Photo" width="80" height="80" class="rounded-circle"/></td>
             <td th:text="${cake.name}"></td>
             <td th:text="${cake.price}"></td>
+           <td th:text="${cake.isAvailable ? 'Yes' : 'No'}"></td>
             <td>
                 <a class="btn bg-warning text-center" th:href="@{/admin/cake/edit/{id}(id=${cake.id})}">Edit</a>
                 <a class="btn bg-danger text-center" th:href="@{/admin/cake/delete/{id}(id=${cake.id})}">Delete</a>

@@ -46,13 +46,11 @@ body {
 	<div class="sidebar">
 		<h3 class="text-center">Admin Panel</h3>
 		<hr>
-		<a href="/admin/dashboard"><i class="fas fa-birthday-cake"></i>
-			Admin Dashboard</a> <a href="/admin/cakes"><i
-			class="fas fa-birthday-cake"></i> Manage Cakes</a> <a
-			href="/admin/cake/add"><i class="fas fa-birthday-cake"></i> Add
-			Cakes</a> <a href="/admin/allUsers"><i class="fas fa-users"></i> All
-			Users</a> <a href="/logout" class="text-danger"><i
-			class="fas fa-sign-out-alt"></i> Logout</a>
+		<a href="/admin/dashboard"><i class="fas fa-birthday-cake"></i> Admin Dashboard</a>
+        <a href="/admin/cakes"><i class="fas fa-birthday-cake"></i> Manage Cakes</a>
+        <a href="/admin/cake/add"><i class="fas fa-birthday-cake"></i> Add Cakes</a>
+        <a href="/admin/allUsers"><i class="fas fa-users"></i> All Users</a>
+        <a href="/logout" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a>
 	</div>
 
 	<!-- Main Content -->
@@ -93,28 +91,26 @@ body {
 			<div class="mt-4">
 				<h4>Recent Orders</h4>
 				<table class="table table-striped">
-					<thead class="table-dark">
+					<thead class="table-dark text-center">
 						<tr>
 							<th>#</th>
-							<td>Time</td>
-							<th>Customer</th>
-							<th>Cake</th>
-							<th>Amount</th>
-							<th>Status</th>
+							<th>Name</th>
+							<th>email</th>
+							<th>address</th>
+							<th>contact</th>
+							<th>photo</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="order : ${orders}">
-							<td th:text="${order.id}"></td>
-							<td th:text="${order.time}"></td>
-							<td th:text="${order.user.name}"></td>
-							<td th:text="${order.cake.price}"></td>
-							<td>
-								<h2
-									th:class="${order.isConfirm == true ? 'badge bg-success' : 'badge bg-warning'}"
-									th:text="${order.isConfirm ? 'Done' : 'Pending'}">Pending</h2>
+						<tr th:each="b : ${buyers}">
+							<td th:text="${b.id}"></td>
+							<td th:text="${b.name}"></td>
+							<td th:text="${b.email}"></td>
+							<td th:text="${b.address}"></td>
+							<td th:text="${b.contact}"></td>
+							<td><img th:src="@{/uploads/{photo}(photo=${b.photo})}"
+								alt="User Photo" width="50" height="50" /></td>
 
-							</td>
 						</tr>
 					</tbody>
 				</table>
