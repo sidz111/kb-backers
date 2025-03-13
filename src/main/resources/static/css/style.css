@@ -331,6 +331,7 @@ html {
 .intro_content {
   position: absolute;
   top: 50%;
+  left: 50%;
   transform: translateY(-50%);
   right: -165px;
   width: 679px;
@@ -520,11 +521,7 @@ html {
 
 .menus:hover {
   border: 1px solid #ff2377;
-  background: linear-gradient(
-    235deg,
-    rgba(231, 111, 169, 0.741) 30%,
-    rgba(165, 77, 124, 0.763) 67%
-  );
+  background: #aba9a1;
 }
 
 .menus:hover .text .one-forth .price {

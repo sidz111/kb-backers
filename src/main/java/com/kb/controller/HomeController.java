@@ -46,6 +46,8 @@ public class HomeController {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		model.addAttribute("user", userService.getUserByEmail(email));
 		model.addAttribute("cakes", cakeService.getAllCakes());
+		String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+		model.addAttribute("myOrders", orderService.getOrdersByUser(userService.getUserByEmail(userEmail)));
 		return "index";
 	}
 

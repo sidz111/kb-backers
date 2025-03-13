@@ -30,7 +30,8 @@
 <link rel="stylesheet" href="css/flaticon.css" />
 <link rel="stylesheet" href="css/icomoon.css" />
 <link rel="stylesheet" href="css/style.css" />
-<title>Document</title>
+<title>Kb Baker</title>
+<link href="images/kb.png" rel="icon" />
 </head>
 
 <body>
@@ -38,7 +39,12 @@
 	<nav
 		class="navbar navbar-expand-lg text-black bg-warning ftco-navbar-warning fixed-top">
 		<div class="container">
-			<a href="/" class="navbar-brand text-black fw-bold">KB_Backer</a>
+			<a href="/"
+				class="navbar-brand text-black fw-bold d-flex align-items-center">
+				<img src="images/kb.png" alt="KB Bakers Logo"
+				style="height: 40px; width: auto; margin-right: 10px;">
+				KB_Baker
+			</a>
 
 			<!-- Navbar Toggler -->
 			<button class="navbar-toggler" type="button"
@@ -58,10 +64,15 @@
 						class="nav-link text-black">Menu</a></li>
 					<li class="nav-item"><a href="#testimonial"
 						class="nav-link text-black">Testimonials</a></li>
-					<li th:if="${user.role}=='ROLE_ADMIN'" class="nav-item pe-5"><a
-						href="/admin/dashboard" class="nav-link text-black">Manage
-							Cakes</a></li>
+					<li th:if="${user.role}=='ROLE_ADMIN'" class="nav-item pe-5">
+						<a href="/admin/dashboard" class="nav-link text-black">Manage
+							Cakes</a>
+					</li>
+					<li>
+						<button type="button" class="btn btn-dark" data-bs-toggle="modal"
+							data-bs-target="#myOrdersModal">My Orders</button>
 
+					</li>
 					<li class="nav-item ps-5"><a href="/logout"
 						class="btn bg-dark text-white">Logout</a></li>
 
@@ -74,6 +85,7 @@
 			</div>
 		</div>
 	</nav>
+
 
 
 	<!-- navigation ends -->
@@ -204,38 +216,6 @@
 		</div>
 	</section>
 
-
-
-	<!-- <section>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="featured">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="featured-menus ftco-animate">
-                    <div
-                      class="menu-img img"
-                      style="background-image: url(images/b1.jpg)"
-                    ></div>
-                    <div class="text text-center">
-                      <h3>Desert</h3>
-                      <p>
-                        <span>Chocolate</span>,
-                        <span>Sprinkles</span>,<span>Strawberry</span>,<span
-                          >Waffers</span
-                        >
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> -->
-
 	<!-- featured section ends  -->
 
 	<!-- about us section starts  -->
@@ -251,13 +231,14 @@
 								<h2>Beautiful Story</h2>
 							</div>
 							<div class="intro_text">
-								<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									Rerum, voluptatum, earum corrupti molestiae id, alias quaerat
-									qui expedita voluptatibus sed magnam aperiam quos! Illum quo
-									nobis repellat possimus alias reiciendis quas pariatur, labore
-									maxime blanditiis. Nam perferendis veritatis necessitatibus?
-									Animi distinctio at et assumenda doloremque possimus unde
-									doloribus aliquid nobis.</p>
+								<p>🍰 Welcome to KB Baker – Where Every Bite is Bliss! 🎂 At
+									KB Baker, we blend passion, creativity, and the finest
+									ingredients to craft cakes that make every celebration sweeter.
+									From classic flavors to custom-designed masterpieces, our
+									freshly baked treats are made with love and delivered with
+									care. Whether it’s a birthday, wedding, or just a craving for
+									something sweet, KB Baker is here to make your moments
+									unforgettable. ✨ Order now and taste the magic! ✨</p>
 							</div>
 						</div>
 						<div class="row">
@@ -391,7 +372,7 @@
 			</div>
 		</div>
 	</section>
-	
+
 	<!-- Menu section ends  -->
 
 	<section class="ftco-section" id="menu">
@@ -424,9 +405,9 @@
 							<p th:text="${c.description}"></p>
 
 							<!-- Display Order Button Only if Cake is Available -->
-							<a th:if="${c.isAvailable}" th:href="@{'/buyer/order/' + ${c.id}}"
-								class="btn btn-warning">Order Now</a> <span
-								th:if="${!c.isAvailable}" class="text-muted">Not
+							<a th:if="${c.isAvailable}"
+								th:href="@{'/buyer/order/' + ${c.id}}" class="btn btn-warning">Order
+								Now</a> <span th:if="${!c.isAvailable}" class="text-muted">Not
 								Available</span>
 						</div>
 					</div>
@@ -458,15 +439,15 @@
 									<span class="fa fa-quote-left"></span>
 								</div>
 								<div class="text">
-									<p class="mb-4">Lorem ipsum dolor sit amet consectetur
-										adipisicing elit. Ipsa illo corrupti ratione voluptatibus
-										recusandae dolore.</p>
+									<p class="mb-4">The cakes from KB Baker are simply amazing!
+										They make every occasion extra special with their delicious
+										flavors and beautiful designs.</p>
 									<div class="d-flex align-items-center">
 										<div class="user-img"
 											style="background-image: url(images/person_1.jpg)"></div>
 										<div class="pl-3">
-											<p class="name">Nilay Hirpara</p>
-											<span class="position">Owner</span>
+											<p class="name">Aarav Sharma</p>
+											<span class="position">Businessman</span>
 										</div>
 									</div>
 								</div>
@@ -479,15 +460,15 @@
 									<span class="fa fa-quote-left"></span>
 								</div>
 								<div class="text">
-									<p class="mb-4">Lorem ipsum dolor sit amet consectetur
-										adipisicing elit. Ipsa illo corrupti ratione voluptatibus
-										recusandae dolore.</p>
+									<p class="mb-4">I ordered a custom birthday cake, and it
+										was beyond my expectations! The taste and presentation were
+										both fantastic.</p>
 									<div class="d-flex align-items-center">
 										<div class="user-img"
 											style="background-image: url(images/person_2.jpg)"></div>
 										<div class="pl-3">
-											<p class="name">Nilay Hirpara</p>
-											<span class="position">Owner</span>
+											<p class="name">Neha Kapoor</p>
+											<span class="position">Marketing Manager</span>
 										</div>
 									</div>
 								</div>
@@ -500,15 +481,14 @@
 									<span class="fa fa-quote-left"></span>
 								</div>
 								<div class="text">
-									<p class="mb-4">Lorem ipsum dolor sit amet consectetur
-										adipisicing elit. Ipsa illo corrupti ratione voluptatibus
-										recusandae dolore.</p>
+									<p class="mb-4">The best bakery I have ever tried! Their
+										cakes are fresh, flavorful, and absolutely delightful.</p>
 									<div class="d-flex align-items-center">
 										<div class="user-img"
 											style="background-image: url(images/person_3.jpg)"></div>
 										<div class="pl-3">
-											<p class="name">Nilay Hirpara</p>
-											<span class="position">Owner</span>
+											<p class="name">Vikram Iyer</p>
+											<span class="position">Software Engineer</span>
 										</div>
 									</div>
 								</div>
@@ -521,15 +501,14 @@
 									<span class="fa fa-quote-left"></span>
 								</div>
 								<div class="text">
-									<p class="mb-4">Lorem ipsum dolor sit amet consectetur
-										adipisicing elit. Ipsa illo corrupti ratione voluptatibus
-										recusandae dolore.</p>
+									<p class="mb-4">I loved the chocolate truffle cake from KB
+										Baker! The texture was so soft and rich in flavor.</p>
 									<div class="d-flex align-items-center">
 										<div class="user-img"
 											style="background-image: url(images/person_4.jpg)"></div>
 										<div class="pl-3">
-											<p class="name">Nilay Hirpara</p>
-											<span class="position">Owner</span>
+											<p class="name">Priya Verma</p>
+											<span class="position">Fashion Designer</span>
 										</div>
 									</div>
 								</div>
@@ -542,15 +521,14 @@
 									<span class="fa fa-quote-left"></span>
 								</div>
 								<div class="text">
-									<p class="mb-4">Lorem ipsum dolor sit amet consectetur
-										adipisicing elit. Ipsa illo corrupti ratione voluptatibus
-										recusandae dolore.</p>
+									<p class="mb-4">If you want a cake that is both delicious
+										and beautifully designed, KB Baker is the place to go!</p>
 									<div class="d-flex align-items-center">
 										<div class="user-img"
-											style="background-image: url(images/person_1.jpg)"></div>
+											style="background-image: url(images/person_5.jpg)"></div>
 										<div class="pl-3">
-											<p class="name">Nilay Hirpara</p>
-											<span class="position">Owner</span>
+											<p class="name">Rohan Mehta</p>
+											<span class="position">Entrepreneur</span>
 										</div>
 									</div>
 								</div>
@@ -561,6 +539,7 @@
 			</div>
 		</div>
 	</section>
+
 
 	<!-- testimonial section ends -->
 
@@ -571,201 +550,36 @@
 			<div class="row justify-content-center mb-5 pb-2">
 				<div class="col-md-12 text-center heading-section ftco-animate">
 					<span class="subheading">Chef</span>
-					<h2 class="mb-4">Our Master Chef</h2>
+					<h2 class="mb-4">Meet Our Master Chef</h2>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="staff">
-						<div class="img" style="background-image: url(images/chef4.jpg)"></div>
-						<div class="text pt-4">
-							<h3>Navnit Kumar</h3>
-							<span class="position mb-2">Cake Designer</span>
-							<div class="faded">
-								<ul class="ftco-social d-flex">
-									<li class="ftco-animate"><a href="#"><span
-											class="fa fa-instagram"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span
-											class="fa fa-twitter"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span
-											class="fa fa-linkedin"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span
-											class="fa fa-facebook"></span></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
+			<div class="row align-items-center">
+				<div class="col-md-6 ftco-animate">
+					<div class="img"
+						style="background-image: url(images/cheif.jpg); height: 400px; background-size: contain; background-repeat: no-repeat; background-position: center; border-radius: 10px;"></div>
+
 				</div>
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="staff">
-						<div class="img" style="background-image: url(images/chef1.jpg)"></div>
-						<div class="text pt-4">
-							<h3>Nilay Hirpara</h3>
-							<span class="position mb-2">Owner</span>
-							<div class="faded">
-								<ul class="ftco-social d-flex">
-									<li class="ftco-animate"><a href="#"><span
-											class="fa fa-instagram"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span
-											class="fa fa-twitter"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span
-											class="fa fa-linkedin"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span
-											class="fa fa-facebook"></span></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="staff">
-						<div class="img" style="background-image: url(images/chef2.jpg)"></div>
-						<div class="text pt-4">
-							<h3>Ravi Kumawat</h3>
-							<span class="position mb-2">Cake Maker</span>
-							<div class="faded">
-								<ul class="ftco-social d-flex">
-									<li class="ftco-animate"><a href="#"><span
-											class="fa fa-instagram"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span
-											class="fa fa-twitter"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span
-											class="fa fa-linkedin"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span
-											class="fa fa-facebook"></span></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="staff">
-						<div class="img" style="background-image: url(images/chef3.jpg)"></div>
-						<div class="text pt-4">
-							<h3>Somyadeep Dey</h3>
-							<span class="position mb-2">Manager</span>
-							<div class="faded">
-								<ul class="ftco-social d-flex">
-									<li class="ftco-animate"><a href="#"><span
-											class="fa fa-instagram"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span
-											class="fa fa-twitter"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span
-											class="fa fa-linkedin"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span
-											class="fa fa-facebook"></span></a></li>
-								</ul>
-							</div>
-						</div>
+				<div class="col-md-6 ftco-animate">
+					<div class="text">
+						<h3 class="mb-3">Chef Dhairya Thakkar</h3>
+						<span class="position mb-3">Master Cake Designer</span>
+						<p>With years of expertise in baking, Chef Dhairya Thakkar is
+							known for crafting stunning and delicious cakes that elevate
+							every celebration. His passion for creating artistic and
+							flavorful cakes has made him a favorite among dessert lovers.</p>
+						<!-- <ul class="ftco-social d-flex mt-3">
+                        <li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span class="fa fa-linkedin"></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
+                    </ul> -->
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<!-- staff section --- chef ends -->
 
-	<!-- order a cake section starts -->
 
-	<section class="ftco-section img" id="order"
-		style="background-image: url(images/order_bg.jpg)"
-		data-stellar-background-ratio="0.5">
-		<div class="container">
-			<div class="row d-flex">
-				<div
-					class="col-md-7 ftco-animate makereservation p-4 px-md-5 pb-md-5">
-					<div class="heading-section ftco-animate mb-5 text-center">
-						<span class="subheading">Order</span>
-						<h2 class="mb-4">Special Cake</h2>
-					</div>
-					<form action="#">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="">Name</label> <input type="text"
-										class="form-control" placeholder="John Doe" />
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="">Email</label> <input type="email"
-										class="form-control" placeholder="johndoe@gmail.com" />
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="">Address</label> <input type="text"
-										class="form-control" placeholder="XYZ" />
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="">Phone</label> <input type="text"
-										class="form-control" placeholder="9874563215" />
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="">Date</label> <input type="text"
-										class="form-control" id="book_date" placeholder="Date" />
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="">Time</label> <input type="text"
-										class="form-control" id="book_time" placeholder="Time" />
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="">Cake Flavour</label>
-									<div class="select-wrap one-third">
-										<div class="icon">
-											<span class="ios-ios-arrow-down"></span>
-										</div>
-										<select name="" id="" class="form-control">
-											<option value="">Black Forest</option>
-											<option value="">Yellow Butter Cake</option>
-											<option value="">Pound Cake</option>
-											<option value="">Red Velvet Cake</option>
-											<option value="">Carrot Cake</option>
-											<option value="">Sponge Cake</option>
-											<option value="">Genoise Cake</option>
-											<option value="">Chiffon Cake</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="">Kg</label>
-									<div class="select-wrap one-third">
-										<div class="icon">
-											<span class="ios-ios-arrow-down"></span>
-										</div>
-										<select name="" id="" class="form-control">
-											<option value="">0.5</option>
-											<option value="">1</option>
-											<option value="">1.5</option>
-											<option value="">2.5</option>
-											<option value="">5</option>
-											<option value="">10</option>
-											<option value="">Custom</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-12 mt-3">
-								<div class="form-group text-center">
-									<input type="submit" value="Order Your Cake"
-										class="btn btn-primary py-3 px-5" />
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
 	<!-- order a cake section ends -->
 
 	<!-- blog section starts -->
@@ -839,91 +653,6 @@
 	</section>
 	<!-- blog section ends -->
 
-	<!-- footer section starts -->
-	<section class="ftco-footer ftco-bg-dark ftco-section">
-		<div class="container">
-			<div class="row mb-5">
-				<div class="col-md-6 col-lg-3">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Our Cakes</h2>
-						<p>
-							We serve and take all type of cake orders. You can personalised
-							cake of your own choice. We have the best chef in the city
-							working for us and happying serving to you. <br /> <br /> <br />
-							cake@gmail.com <br /> +91 1234567890
-						</p>
-						<ul
-							class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
-							<li class="ftco-animate"><a href="#"><span
-									class="fa fa-facebook"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
-									class="fa fa-twitter"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
-									class="fa fa-instagram"></span></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Open Hours</h2>
-						<ul class="list-unstyled open-hours">
-							<li class="d-flex"><span>Monday</span><span>9:00 -
-									24:00</span></li>
-							<li class="d-flex"><span>Tuesday</span><span>9:00 -
-									24:00</span></li>
-							<li class="d-flex"><span>Wednesday</span><span>9:00 -
-									24:00</span></li>
-							<li class="d-flex"><span>Thursday</span><span>9:00 -
-									24:00</span></li>
-							<li class="d-flex"><span>Friday</span><span>9:00 -
-									02:00</span></li>
-							<li class="d-flex"><span>Saturday</span><span>9:00 -
-									02:00</span></li>
-							<li class="d-flex"><span>Sunday</span><span> 9:00 -
-									02:00</span></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Instagram</h2>
-						<div class="thumb d-sm-flex">
-							<a href="#" class="thumb-menu img"
-								style="background-image: url(images/insta-1.jpg)"></a> <a
-								href="#" class="thumb-menu img"
-								style="background-image: url(images/insta-2.jpg)"></a> <a
-								href="#" class="thumb-menu img"
-								style="background-image: url(images/insta-3.jpg)"></a>
-						</div>
-						<div class="thumb d-sm-flex">
-							<a href="#" class="thumb-menu img"
-								style="background-image: url(images/insta-4.jpg)"></a> <a
-								href="#" class="thumb-menu img"
-								style="background-image: url(images/insta-5.jpg)"></a> <a
-								href="#" class="thumb-menu img"
-								style="background-image: url(images/insta-6.jpg)"></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Newsletter</h2>
-						<p>To get cake catalogue every month by subscribing below.</p>
-						<form action="/subscribe-us" method="post" class="subscribe-form">
-							<div class="form-group">
-								<input type="email" name="email"
-									class="form-control mb-2 text-center"
-									placeholder="Email here..." />
-								<button type="submit" class="form-control submit px-3"
-									onclick="success()">Submit</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
 	<!-- User Info Modal -->
 	<div class="modal fade" id="userInfoModal" tabindex="-1"
 		aria-labelledby="userInfoModalLabel" aria-hidden="true">
@@ -963,9 +692,125 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- My Orders Modal -->
+<div class="modal fade" id="myOrdersModal" tabindex="-1" aria-labelledby="myOrdersModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myOrdersModalLabel">My Orders</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Time</th>
+                            <th>Cake Name</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="order : ${myOrders}">
+                            <td th:text="${order.id}"></td>
+                            <td th:text="${order.time}"></td>
+                            <td th:text="${order.cake.name}"></td>
+                            <td>
+                                <span th:if="${order.isConfirm}" class="badge bg-success">Confirmed</span>
+                                <span th:unless="${order.isConfirm}" class="badge bg-warning">Pending</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+	
+
+	<!-- Footer Section Starts -->
+	<section class="ftco-footer ftco-bg-dark ftco-section">
+		<div class="container">
+			<div class="row mb-1">
+				<!-- About KB Bakers -->
+				<div class="col-md-6 col-lg-3">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">KB Bakers</h2>
+						<p>
+							<strong>खुशखबर!</strong> Now serving fresh, delicious, and 100%
+							pure veg bakery items. KB Bakers offers custom cakes, biscuits,
+							and bakery products with home delivery. Visit us for the perfect
+							blend of Cake & Art! 🎂
+						</p>
+						<p>
+							<strong>Address:</strong> प्लॉट नं. ३३, के.के. वाघ कॉलेज मागे,
+							दुर्गा नगर, मारुति मंदिराशेजारी, पंचवटी, नाशिक.
+						</p>
+						<p>
+							<strong>Contact:</strong> 📞 Bhakti: 9527225451 | KB Bakers:
+							8446555891 / 9890097279
+						</p>
+						<ul
+							class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
+							<li class="ftco-animate"><a href="#"><span
+									class="fa fa-facebook"></span></a></li>
+							<li class="ftco-animate"><a href="#"><span
+									class="fa fa-instagram"></span></a></li>
+							<li class="ftco-animate"><a href="#"><span
+									class="fa fa-whatsapp"></span></a></li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Open Hours -->
+				<div class="col-md-6 col-lg-3">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Open Hours</h2>
+						<ul class="list-unstyled open-hours">
+							<li class="d-flex"><span>Monday - Thursday</span><span>9:00
+									AM - 12:00 AM</span></li>
+							<li class="d-flex"><span>Friday - Sunday</span><span>9:00
+									AM - 02:00 AM</span></li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Large Image on the Right Side -->
+				<div class="col-12 col-lg-6 d-flex justify-content-end">
+					<div class="ftco-footer-widget mb-4">
+						<div class="footer-image">
+							<img src="images/kb-banne.jpg" alt="KB Bakers"
+								class="img-fluid rounded"
+								style="width: 70vw; height: auto; max-height: 500px; object-fit: contain; border-radius: 10px;">
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Subscription Section -->
+			<!-- <div class="row">
+            <div class="col-md-12 text-center">
+                <h2 class="ftco-heading-2">Subscribe for Offers</h2>
+                <p>Get our cake catalog and new offers every month.</p>
+                <form action="/subscribe-us" method="post" class="subscribe-form d-inline-block">
+                    <div class="form-group d-flex">
+                        <input type="email" name="email" class="form-control text-center" placeholder="Enter your email..." required />
+                        <button type="submit" class="btn btn-primary px-3">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div> -->
+		</div>
+	</section>
+	<!-- Footer Section Ends -->
 
 
-	<!-- footer section ends -->
+
 
 	<!-- scripts -->
 	<script src="js/jquery.min.js"></script>
