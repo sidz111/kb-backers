@@ -15,6 +15,7 @@ import com.kb.Entity.Review;
 import com.kb.Entity.User;
 import com.kb.repository.CakeRepository;
 import com.kb.repository.UserRepository;
+import com.kb.service.OrderService;
 import com.kb.service.ReviewService;
 
 @Controller
@@ -26,6 +27,9 @@ public class BuyerReviewController {
 
     @Autowired
     private CakeRepository cakeRepository;
+    
+    @Autowired
+    private OrderService orderService;
     
     @Autowired
     private UserRepository userRepository;
@@ -61,5 +65,11 @@ public class BuyerReviewController {
     @GetMapping("/success")
     public String reviewSuccess() {
         return "buyer/review-success";
+    }
+    
+    @GetMapping("/cancel-order/{orderId}")
+    public String cancelOrder(@PathVariable("orderId") Long orderId) {
+    	orderService.deleteOrderById(orderId);
+    	return "redirect:/";
     }
 }

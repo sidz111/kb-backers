@@ -33,113 +33,183 @@
 <title>Kb Baker</title>
 <link href="images/kb.png" rel="icon" />
 <style>
-    .reviews-section {
-        background: linear-gradient(to right, #ff9a9e, #fad0c4);
-        color: #333;
-        padding: 20px;
-    }
+.reviews-section {
+	background: linear-gradient(135deg, #fff1f1 0%, #ffebeb 100%);
+	padding: 60px 20px;
+	position: relative;
+	overflow: hidden;
+}
 
-    .reviews-container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
+.reviews-container {
+	max-width: 1240px;
+	margin: 0 auto;
+}
 
-    .review-card {
-        background: white;
-        border-radius: 10px;
-        transition: transform 0.3s ease;
-        padding: 15px;
-        margin: 10px;
-        max-width: 500px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+.reviews-header {
+	text-align: center;
+	margin-bottom: 40px;
+}
 
-    .review-card:hover {
-        transform: scale(1.05);
-    }
+.reviews-title {
+	color: #2c2c2c;
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-bottom: 10px;
+	letter-spacing: -0.5px;
+}
 
-    .hidden-review {
-        display: none;
-    }
+.reviews-subtitle {
+	color: #666;
+	font-size: 1.1rem;
+	font-weight: 400;
+}
 
-    .review-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-    }
+.reviews-grid, .additional-reviews {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 30px;
+	margin-bottom: 40px;
+}
 
-    .review-cake-image {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-right: 15px;
-        border: 2px solid #ff9a9e;
-    }
+.additional-reviews {
+	display: none;
+}
 
-    .reviewer-info {
-        flex-grow: 1;
-    }
+.additional-reviews.show {
+	display: grid;
+}
 
-    .stars {
-        font-size: 1.2rem;
-        color: #ffd700;
-        margin-bottom: 5px;
-    }
+.review-card {
+	background: #ffffff;
+	border-radius: 12px;
+	overflow: hidden;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	border: 1px solid #f0f0f0;
+}
 
-    .reviewer-name {
-        font-weight: bold;
-        font-size: 1.1rem;
-        color: #333;
-    }
+.review-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
 
-    .review-content {
-        max-height: 100px;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        color: #666;
-        line-height: 1.5;
-    }
+.review-inner {
+	padding: 25px;
+}
 
-    .review-content.expanded {
-        max-height: 1000px;
-    }
+.review-header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
 
-    .toggle-btn {
-        background: none;
-        border: none;
-        color: #ff9a9e;
-        cursor: pointer;
-        padding: 5px 0;
-        font-weight: bold;
-        font-size: 0.9rem;
-        display: block;
-        margin-top: 10px;
-    }
+.review-cake-image {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-right: 15px;
+	border: 3px solid #ff9a9e;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-    .toggle-btn:hover {
-        color: #ff6b6f;
-    }
+.reviewer-info {
+	flex-grow: 1;
+}
 
-    .show-more-container {
-        text-align: center;
-        margin-top: 20px;
-    }
+.stars {
+	font-size: 1.2rem;
+	color: #ff9a9e;
+	margin-bottom: 6px;
+	unicode-bidi: bidi-override;
+}
 
-    .show-more-btn {
-        background: #ff9a9e;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1rem;
-        transition: background 0.3s ease;
-    }
+.reviewer-name {
+	font-weight: 600;
+	font-size: 1.1rem;
+	color: #2c2c2c;
+	letter-spacing: 0.2px;
+}
 
-    .show-more-btn:hover {
-        background: #ff6b6f;
-    }
+.review-content {
+	max-height: 80px;
+	overflow: hidden;
+	transition: max-height 0.4s ease;
+	color: #555;
+	font-size: 0.95rem;
+	line-height: 1.6;
+}
+
+.review-content.expanded {
+	max-height: 600px;
+}
+
+.toggle-btn {
+	background: none;
+	border: none;
+	color: #ff9a9e;
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 0.9rem;
+	padding: 8px 0;
+	margin-top: 15px;
+	transition: color 0.3s ease;
+	display: block;
+	width: 100%;
+	text-align: left;
+}
+
+.toggle-btn:hover {
+	color: #ff6b6f;
+}
+
+.show-more-container {
+	text-align: center;
+}
+
+.show-more-btn {
+	background: #ff9a9e;
+	color: #ffffff;
+	padding: 12px 30px;
+	border: none;
+	border-radius: 30px;
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: 600;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 12px rgba(255, 154, 158, 0.3);
+}
+
+.show-more-btn:hover {
+	background: #ff6b6f;
+	transform: translateY(-2px);
+	box-shadow: 0 6px 16px rgba(255, 154, 158, 0.4);
+}
+
+.arrow-icon {
+	transition: transform 0.3s ease;
+}
+
+.show-more-btn.active .arrow-icon {
+	transform: rotate(180deg);
+}
+
+@media ( max-width : 991px) {
+	.reviews-grid, .additional-reviews {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media ( max-width : 767px) {
+	.reviews-grid, .additional-reviews {
+		grid-template-columns: 1fr;
+	}
+	.reviews-title {
+		font-size: 2rem;
+	}
+}
 </style>
 </head>
 
@@ -171,8 +241,8 @@
 						class="nav-link text-black">Gallery</a></li>
 					<li class="nav-item"><a href="#menu"
 						class="nav-link text-black">Menu</a></li>
-					<li class="nav-item"><a href="#testimonial"
-						class="nav-link text-black">Testimonials</a></li>
+					<li class="nav-item"><a href="#reviews-section"
+						class="nav-link text-black">reviews-sections</a></li>
 					<li th:if="${user.role}=='ROLE_ADMIN'" class="nav-item pe-5">
 						<a href="/admin/dashboard" class="nav-link text-black">Manage
 							Cakes</a>
@@ -518,7 +588,7 @@
 								th:href="@{'/buyer/order/' + ${c.id}}" class="btn btn-warning">Order
 								Now</a> <a th:if="${c.isAvailable}"
 								th:href="@{'/buyer/reviews/add/' + ${c.id}}"
-								class="btn btn-warning">Add Review</a> <span
+								class="btn text-success">Add Review</a> <span
 								th:if="${!c.isAvailable}" class="text-muted">Not
 								Available</span>
 						</div>
@@ -529,15 +599,15 @@
 	</section>
 	<!-- menu section ends -->
 
-	<!-- testimonial section starts -->
-	<section class="ftco-section testimony-section img" id="testimonial"
+	<!-- reviews-section section starts -->
+	<section class="ftco-section testimony-section img" id="reviews-section"
 		style="background-image: url(images/bg_1.jpg)">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row justify-content-center mb-5">
 				<div
 					class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-					<span class="subheading">Testimonials</span>
+					<span class="subheading">reviews-sections</span>
 					<h2 class="mb-3">Happy Clients</h2>
 				</div>
 			</div>
@@ -653,7 +723,7 @@
 	</section>
 
 
-	<!-- testimonial section ends -->
+	<!-- reviews-section section ends -->
 
 	<!-- staff section --- chef starts -->
 
@@ -694,333 +764,84 @@
 
 	<!-- order a cake section ends -->
 
-	<!-- blog section starts -->
-	<section class="ftco-section bg-light" id="blog">
-		<div class="container">
-			<div class="row justify-content-center mb-5">
-				<div class="col-md-7 text-center heading-section ftco-animate">
-					<span class="subheading">Blog</span>
-					<h2 class="mb-4">Recent Posts</h2>
+
+	<div class="reviews-section">
+		<div class="reviews-container">
+			<div class="reviews-header">
+				<h2 class="reviews-title">What Our Customers Say</h2>
+				<p class="reviews-subtitle">Real feedback from cake lovers like
+					you</p>
+			</div>
+
+			<!-- Initial 3 reviews -->
+			<div class="reviews-grid">
+				<div th:each="review, iterStat : ${reviews}"
+					th:if="${iterStat.count <= 3}" class="review-card">
+					<div class="review-inner">
+						<div class="review-header">
+							<img
+								th:src="@{'/cakes/' + ${review.cake.photo} ?: '/cakes/default_cake.jpg'}"
+								th:alt="${review.cake.name} + ' photo'"
+								class="review-cake-image" />
+							<div class="reviewer-info">
+								<div class="stars" th:text="${review.stars}">★★★★★</div>
+								<div class="reviewer-name" th:text="${review.user.name}">Reviewer
+									Name</div>
+							</div>
+						</div>
+						<div class="review-content" th:id="'review-' + ${review.id}">
+							<p th:text="${review.comment}">Review text goes here</p>
+						</div>
+						<button class="toggle-btn"
+							th:onclick="'toggleReview(\'' + ${review.id} + '\')'"
+							th:text="'Read More'">Read More</button>
+					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-4">
-					<div class="single-cat-widget">
-						<div class="content relative">
-							<div class="overlay overlay-bg"></div>
-							<a href="#" target="_blank">
-								<div class="thumb">
-									<img src="images/cat-widget1.jpg" alt=""
-										class="content-image img-fluid d-block mx-auto" />
-								</div>
-								<div class="content-details">
-									<h4 class="content-title mx-auto text-uppercase">Social
-										Life</h4>
-									<span></span>
-									<p>Enjoy your social life.</p>
-								</div>
-							</a>
+
+			<!-- Additional reviews -->
+			<div class="additional-reviews" id="additionalReviews">
+				<div th:each="review, iterStat : ${reviews}"
+					th:if="${iterStat.count > 3}" class="review-card">
+					<div class="review-inner">
+						<div class="review-header">
+							<img
+								th:src="@{'/cakes/' + ${review.cake.photo} ?: '/cakes/default_cake.jpg'}"
+								th:alt="${review.cake.name} + ' photo'"
+								class="review-cake-image" />
+							<div class="reviewer-info">
+								<div class="stars" th:text="${review.stars}">★★★★★</div>
+								<div class="reviewer-name" th:text="${review.user.name}">Reviewer
+									Name</div>
+							</div>
 						</div>
+						<div class="review-content" th:id="'review-' + ${review.id}">
+							<p th:text="${review.comment}">Review text goes here</p>
+						</div>
+						<button class="toggle-btn"
+							th:onclick="'toggleReview(\'' + ${review.id} + '\')'"
+							th:text="'Read More'">Read More</button>
 					</div>
 				</div>
-				<div class="col-lg-4">
-					<div class="single-cat-widget">
-						<div class="content relative">
-							<div class="overlay overlay-bg"></div>
-							<a href="#" target="_blank">
-								<div class="thumb">
-									<img src="images/cat-widget2.jpg" alt=""
-										class="content-image img-fluid d-block mx-auto" />
-								</div>
-								<div class="content-details">
-									<h4 class="content-title mx-auto text-uppercase">Politics
-									</h4>
-									<span></span>
-									<p>Be a part of politics.</p>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="single-cat-widget">
-						<div class="content relative">
-							<div class="overlay overlay-bg"></div>
-							<a href="#" target="_blank">
-								<div class="thumb">
-									<img src="images/cat-widget3.jpg" alt=""
-										class="content-image img-fluid d-block mx-auto" />
-								</div>
-								<div class="content-details">
-									<h4 class="content-title mx-auto text-uppercase">Food</h4>
-									<span></span>
-									<p>Let the food be finished.</p>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
+			</div>
+
+			<!-- Show More button -->
+			<div class="show-more-container" th:if="${#lists.size(reviews) > 3}">
+				<button id="showMoreBtn" class="show-more-btn"
+					onclick="toggleAllReviews()">
+					<span>Load More Reviews</span>
+					<svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24"
+						fill="none" stroke="currentColor">
+                    <path d="M6 9l6 6 6-6" />
+                </svg>
+				</button>
 			</div>
 		</div>
-	</section>
-	<!-- blog section ends -->
-	
+	</div>
 
-<div class="reviews-section">
-    <div class="reviews-container">
-        <div class="reviews-header">
-            <h2 class="reviews-title">What Our Customers Say</h2>
-            <p class="reviews-subtitle">Real feedback from cake lovers like you</p>
-        </div>
 
-        <!-- Initial 3 reviews -->
-        <div class="reviews-grid">
-            <div th:each="review, iterStat : ${reviews}" 
-                 th:if="${iterStat.count <= 3}"
-                 class="review-card">
-                <div class="review-inner">
-                    <div class="review-header">
-                        <img th:src="@{'/cakes/' + ${review.cake.photo} ?: '/cakes/default_cake.jpg'}"
-                             th:alt="${review.cake.name} + ' photo'" 
-                             class="review-cake-image"/>
-                        <div class="reviewer-info">
-                            <div class="stars" th:text="${review.stars}">★★★★★</div>
-                            <div class="reviewer-name" th:text="${review.user.name}">Reviewer Name</div>
-                        </div>
-                    </div>
-                    <div class="review-content" th:id="'review-' + ${review.id}">
-                        <p th:text="${review.comment}">Review text goes here</p>
-                    </div>
-                    <button class="toggle-btn" 
-                            th:onclick="'toggleReview(\'' + ${review.id} + '\')'"
-                            th:text="'Read More'">Read More</button>
-                </div>
-            </div>
-        </div>
 
-        <!-- Additional reviews -->
-        <div class="additional-reviews" id="additionalReviews">
-            <div th:each="review, iterStat : ${reviews}" 
-                 th:if="${iterStat.count > 3}"
-                 class="review-card">
-                <div class="review-inner">
-                    <div class="review-header">
-                        <img th:src="@{'/cakes/' + ${review.cake.photo} ?: '/cakes/default_cake.jpg'}"
-                             th:alt="${review.cake.name} + ' photo'" 
-                             class="review-cake-image"/>
-                        <div class="reviewer-info">
-                            <div class="stars" th:text="${review.stars}">★★★★★</div>
-                            <div class="reviewer-name" th:text="${review.user.name}">Reviewer Name</div>
-                        </div>
-                    </div>
-                    <div class="review-content" th:id="'review-' + ${review.id}">
-                        <p th:text="${review.comment}">Review text goes here</p>
-                    </div>
-                    <button class="toggle-btn"
-                            th:onclick="'toggleReview(\'' + ${review.id} + '\')'"
-                            th:text="'Read More'">Read More</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Show More button -->
-        <div class="show-more-container" 
-             th:if="${#lists.size(reviews) > 3}">
-            <button id="showMoreBtn" class="show-more-btn" onclick="toggleAllReviews()">
-                <span>Load More Reviews</span>
-                <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M6 9l6 6 6-6"/>
-                </svg>
-            </button>
-        </div>
-    </div>
-</div>
-
-<style>
-    .reviews-section {
-        background: linear-gradient(135deg, #fff1f1 0%, #ffebeb 100%);
-        padding: 60px 20px;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .reviews-container {
-        max-width: 1240px;
-        margin: 0 auto;
-    }
-
-    .reviews-header {
-        text-align: center;
-        margin-bottom: 40px;
-    }
-
-    .reviews-title {
-        color: #2c2c2c;
-        font-size: 2.5rem;
-        font-weight: 700;
-        margin-bottom: 10px;
-        letter-spacing: -0.5px;
-    }
-
-    .reviews-subtitle {
-        color: #666;
-        font-size: 1.1rem;
-        font-weight: 400;
-    }
-
-    .reviews-grid,
-    .additional-reviews {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-        margin-bottom: 40px;
-    }
-
-    .additional-reviews {
-        display: none;
-    }
-
-    .additional-reviews.show {
-        display: grid;
-    }
-
-    .review-card {
-        background: #ffffff;
-        border-radius: 12px;
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 1px solid #f0f0f0;
-    }
-
-    .review-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 24px rgba(0,0,0,0.1);
-    }
-
-    .review-inner {
-        padding: 25px;
-    }
-
-    .review-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .review-cake-image {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-right: 15px;
-        border: 3px solid #ff9a9e;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .reviewer-info {
-        flex-grow: 1;
-    }
-
-    .stars {
-        font-size: 1.2rem;
-        color: #ff9a9e;
-        margin-bottom: 6px;
-        unicode-bidi: bidi-override;
-    }
-
-    .reviewer-name {
-        font-weight: 600;
-        font-size: 1.1rem;
-        color: #2c2c2c;
-        letter-spacing: 0.2px;
-    }
-
-    .review-content {
-        max-height: 80px;
-        overflow: hidden;
-        transition: max-height 0.4s ease;
-        color: #555;
-        font-size: 0.95rem;
-        line-height: 1.6;
-    }
-
-    .review-content.expanded {
-        max-height: 600px;
-    }
-
-    .toggle-btn {
-        background: none;
-        border: none;
-        color: #ff9a9e;
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 0.9rem;
-        padding: 8px 0;
-        margin-top: 15px;
-        transition: color 0.3s ease;
-        display: block;
-        width: 100%;
-        text-align: left;
-    }
-
-    .toggle-btn:hover {
-        color: #ff6b6f;
-    }
-
-    .show-more-container {
-        text-align: center;
-    }
-
-    .show-more-btn {
-        background: #ff9a9e;
-        color: #ffffff;
-        padding: 12px 30px;
-        border: none;
-        border-radius: 30px;
-        cursor: pointer;
-        font-size: 1rem;
-        font-weight: 600;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(255,154,158,0.3);
-    }
-
-    .show-more-btn:hover {
-        background: #ff6b6f;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(255,154,158,0.4);
-    }
-
-    .arrow-icon {
-        transition: transform 0.3s ease;
-    }
-
-    .show-more-btn.active .arrow-icon {
-        transform: rotate(180deg);
-    }
-
-    @media (max-width: 991px) {
-        .reviews-grid,
-        .additional-reviews {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 767px) {
-        .reviews-grid,
-        .additional-reviews {
-            grid-template-columns: 1fr;
-        }
-        
-        .reviews-title {
-            font-size: 2rem;
-        }
-    }
-</style>
-
-<script>
+	<script>
     function toggleReview(reviewId) {
         const content = document.getElementById('review-' + reviewId);
         const button = content.nextElementSibling;
@@ -1110,6 +931,7 @@
 								<th>Time</th>
 								<th>Cake Name</th>
 								<th>Status</th>
+								<th>Cancel</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -1121,6 +943,8 @@
 									class="badge bg-success">Confirmed</span> <span
 									th:unless="${order.isConfirm}" class="badge bg-warning">Pending</span>
 								</td>
+								<td><a th:if="${order.isConfirm == false}" class="btn bg-warning" th:href="@{'/buyer/reviews/cancel-order/' + ${order.id}}">Cancel
+										Order</a></td>
 							</tr>
 						</tbody>
 					</table>

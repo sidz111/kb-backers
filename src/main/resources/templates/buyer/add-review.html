@@ -4,63 +4,165 @@
     <meta charset="UTF-8">
     <title>Add Review</title>
     <style>
-        .form-container {
-            max-width: 500px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #f9f9f9;
-            border-radius: 8px;
+        body {
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        .form-group {
+
+        .form-container {
+            max-width: 600px;
+            width: 90%;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .form-header h2 {
+            color: #2c2c2c;
+            font-size: 1.8rem;
+            font-weight: 600;
             margin-bottom: 15px;
         }
+
+        .form-header h2 span {
+            color: #ff6b6f;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
         label {
+            font-weight: 600;
+            color: #333;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
-        select, textarea {
+
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            direction: rtl;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            margin: 0;
+        }
+
+        /* Star Hover Effect */
+        .star-rating label:hover,
+        .star-rating label:hover ~ label,
+        .star-rating input:checked ~ label {
+            color: #ff9a9e;
+        }
+
+        textarea {
             width: 100%;
-            padding: 8px;
+            padding: 12px;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 6px;
+            resize: vertical;
+            font-size: 1rem;
+            color: #555;
+            min-height: 120px;
+            transition: border 0.3s ease;
         }
+
+        textarea:focus {
+            outline: none;
+            border-color: #ff9a9e;
+            box-shadow: 0 0 8px rgba(255, 154, 158, 0.4);
+        }
+
         button {
             background: #ff9a9e;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 30px;
             border: none;
-            border-radius: 4px;
+            border-radius: 25px;
             cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #ff6b6f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 154, 158, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            .star-rating label {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="form-container">
-        <h2>Review <span th:text="${cake.name}">Cake Name</span></h2>
+        <div class="form-header">
+            <h2>Review <span th:text="${cake.name}">Cake Name</span></h2>
+        </div>
         <form th:action="@{/buyer/reviews/add}" th:object="${review}" method="post">
             <input type="hidden" th:field="*{cake.id}" />
             <input type="hidden" th:field="*{user.id}" />
             
             <div class="form-group">
-                <label for="rating">Rating:</label>
-                <select th:field="*{rating}" id="rating" required>
-                    <option value="">Select rating</option>
-                    <option value="1">1 Star</option>
-                    <option value="2">2 Stars</option>
-                    <option value="3">3 Stars</option>
-                    <option value="4">4 Stars</option>
-                    <option value="5">5 Stars</option>
-                </select>
+                <label for="rating">Your Rating:</label>
+                <div class="star-rating">
+                    <input type="radio" th:field="*{rating}" id="star5" name="rating" value="5" required>
+                    <label for="star5">★</label>
+                    <input type="radio" th:field="*{rating}" id="star4" name="rating" value="4">
+                    <label for="star4">★</label>
+                    <input type="radio" th:field="*{rating}" id="star3" name="rating" value="3">
+                    <label for="star3">★</label>
+                    <input type="radio" th:field="*{rating}" id="star2" name="rating" value="2">
+                    <label for="star2">★</label>
+                    <input type="radio" th:field="*{rating}" id="star1" name="rating" value="1">
+                    <label for="star1">★</label>
+                </div>
             </div>
             
             <div class="form-group">
                 <label for="comment">Your Review:</label>
-                <textarea th:field="*{comment}" id="comment" rows="5" 
-                         placeholder="Write your review here..." required></textarea>
+                <textarea th:field="*{comment}" id="comment" 
+                          placeholder="Tell us about your experience..." required></textarea>
             </div>
             
             <button type="submit">Submit Review</button>
         </form>
     </div>
+
+    <script>
+        document.querySelectorAll('.star-rating input').forEach(star => {
+            star.addEventListener('change', function() {
+                console.log('Selected rating:', this.value);
+            });
+        });
+    </script>
 </body>
 </html>
