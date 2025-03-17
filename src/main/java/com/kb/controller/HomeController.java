@@ -19,11 +19,15 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kb.Entity.User;
 import com.kb.service.CakeService;
 import com.kb.service.OrderService;
+import com.kb.service.ReviewService;
 import com.kb.service.SubscriberService;
 import com.kb.service.UserService;
 
 @Controller
 public class HomeController {
+	
+	@Autowired
+	ReviewService reviewService;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -48,6 +52,7 @@ public class HomeController {
 		model.addAttribute("cakes", cakeService.getAllCakes());
 		String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
 		model.addAttribute("myOrders", orderService.getOrdersByUser(userService.getUserByEmail(userEmail)));
+		model.addAttribute("reviews", reviewService.getAllReviews());
 		return "index";
 	}
 
