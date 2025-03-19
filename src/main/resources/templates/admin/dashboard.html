@@ -101,6 +101,7 @@ body {
 							<th>Cake</th>
 							<th>Amount</th>
 							<th>Status</th>
+							<th>Mode</th>
 							<th>Confirm</th>
 						</tr>
 					</thead>
@@ -116,6 +117,7 @@ body {
 									th:class="${order.isConfirm == true ? 'badge bg-success' : 'badge bg-warning'}"
 									th:text="${order.isConfirm ? 'Done' : 'Pending'}">Pending</h2>
 							</td>
+							<td th:text="${order.mode}"></td>
 							<td><a
 								th:class="${order.isConfirm == true ? 'btn bg-secondary' : 'btn bg-primary'}"
 								th:href="@{'/admin/confirm-order/' + ${order.id}}"

@@ -45,7 +45,7 @@ public class BuyerController {
 //    }
 
     @GetMapping("/order/{cakeId}")
-    public String confirmOrder(@PathVariable("cakeId") Long cakeId) {
+    public String confirmOrder(@PathVariable("cakeId") Long cakeId, @RequestParam("mode") String mode) {
         Cake cake = cakeService.getCakeById(cakeId).orElse(null);
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.getUserById(userService.getUserByEmail(userEmail).getId()).orElse(null);
@@ -56,6 +56,7 @@ public class BuyerController {
             order.setCake(cake);
             order.setTime(new Date().toString());
             order.setIsConfirm(false);
+            order.setMode(mode);
             orderService.placeOrder(order);
         }
 

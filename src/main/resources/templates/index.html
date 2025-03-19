@@ -584,9 +584,22 @@
 							<p th:text="${c.description}"></p>
 
 							<!-- Display Order Button Only if Cake is Available -->
-							<a th:if="${c.isAvailable}"
+							<!-- <a th:if="${c.isAvailable}"
 								th:href="@{'/buyer/order/' + ${c.id}}" class="btn btn-warning">Order
-								Now</a> <a th:if="${c.isAvailable}"
+								Now</a> -->
+
+							<form th:action="@{'/buyer/order/' + ${c.id}}">
+
+								<select id="myDropdown" name="mode">
+									<option value="Cash On Delivery">Cash On Delivery</option>
+									<option value="Online Payment">Online Payment</option>
+								</select>
+
+								<button type="submit" th:if="${c.isAvailable}"
+									class="btn btn-warning">Order Now</button>
+							</form>
+
+							<a th:if="${c.isAvailable}"
 								th:href="@{'/buyer/reviews/add/' + ${c.id}}"
 								class="btn text-success">Add Review</a> <span
 								th:if="${!c.isAvailable}" class="text-muted">Not
@@ -600,8 +613,8 @@
 	<!-- menu section ends -->
 
 	<!-- reviews-section section starts -->
-	<section class="ftco-section testimony-section img" id="reviews-section"
-		style="background-image: url(images/bg_1.jpg)">
+	<section class="ftco-section testimony-section img"
+		id="reviews-section" style="background-image: url(images/bg_1.jpg)">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row justify-content-center mb-5">
@@ -931,6 +944,7 @@
 								<th>Time</th>
 								<th>Cake Name</th>
 								<th>Status</th>
+								<th>Mode</th>
 								<th>Cancel</th>
 							</tr>
 						</thead>
@@ -943,7 +957,10 @@
 									class="badge bg-success">Confirmed</span> <span
 									th:unless="${order.isConfirm}" class="badge bg-warning">Pending</span>
 								</td>
-								<td><a th:if="${order.isConfirm == false}" class="btn bg-warning" th:href="@{'/buyer/reviews/cancel-order/' + ${order.id}}">Cancel
+								<td th:text="${order.mode}"></td>
+								<td><a th:if="${order.isConfirm == false}"
+									class="btn bg-warning"
+									th:href="@{'/buyer/reviews/cancel-order/' + ${order.id}}">Cancel
 										Order</a></td>
 							</tr>
 						</tbody>

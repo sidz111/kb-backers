@@ -14,6 +14,8 @@ public class Order {
     
     private Boolean isConfirm;
     
+    private String mode;
+    
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -61,4 +63,13 @@ public class Order {
 	public void setIsConfirm(Boolean isConfirm) {
 		this.isConfirm = isConfirm;
 	}
+
+	public String getMode() {
+		return mode;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
+	
 }
