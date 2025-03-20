@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kb.Entity.Subscriber;
 import com.kb.Entity.User;
 import com.kb.service.CakeService;
 import com.kb.service.OrderService;
@@ -105,5 +107,14 @@ public class HomeController {
 		userService.createUser(user);
 
 		return "redirect:/login-page";
+	}
+	
+	@PostMapping("/subscribe-us")
+	public String subscribeUs(@RequestParam("email") String email) {
+		Subscriber s = new Subscriber();
+		s.setEmail(email);
+		s.setTimeDate(new Date().toString());
+		subscriberService.addSubscriber(s);
+		return "redirect:/";
 	}
 }
